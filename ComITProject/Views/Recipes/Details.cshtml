@@ -1,0 +1,64 @@
+﻿@model ComITProject.Models.Recipe
+
+@{
+    ViewData["Title"] = "Details";
+    var ingredients = Model.Ingredients;
+    ingredients = ingredients.Replace(Environment.NewLine, @"<br/>");
+    var instructions = Model.Instructions;
+    instructions = instructions.Replace(Environment.NewLine, @"<br/>");
+    
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Recipe</h4>
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="column-md-12">
+                <dl>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.RecipeName)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.RecipeName)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Description)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column-md-5">
+                <dl>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Ingredients)
+                    </dt>
+                    <dd>
+                       @Html.Raw(ingredients)
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-md-7">
+                <dl>
+                    <dt>
+                         @Html.DisplayNameFor(model => model.Instructions)
+                    </dt>
+                    <dd>
+                        @Html.Raw(instructions)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+   

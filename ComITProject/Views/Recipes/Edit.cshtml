@@ -1,0 +1,63 @@
+﻿@model ComITProject.Models.Recipe
+
+@{
+    ViewData["Title"] = "Edit";
+    var ingredients = Model.Ingredients;
+    ingredients = ingredients.Replace(Environment.NewLine, @"\n");
+    var instructions = Model.Instructions;
+    instructions = instructions.Replace(Environment.NewLine, @"\n");
+}
+
+<h1>Edit Recipe</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="RecipeName" class="control-label"></label>
+                <input asp-for="RecipeName" class="form-control" />
+                <span asp-validation-for="RecipeName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <div class="md-form">
+                            <label asp-for="Ingredients" for="Ingredients">Ingredients</label>
+                            <textarea asp-for="Ingredients" style="line-height: 1;" type="text" id="Ingredients" class="md-textarea form-control" rows="10" columns="5">@ingredients</textarea>
+                            <span asp-validation-for="Ingredients" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="form-group">
+                        <div class="md-form">
+                            <label asp-for="Instructions" for="Instructions">Instructions</label>
+                            <textarea asp-for="Instructions" style="line-height: 1;" type="text" id="Instructions" class="md-textarea form-control" rows="10" columns="8">@Html.Raw(instructions)</textarea>
+                            <span asp-validation-for="Instructions" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
